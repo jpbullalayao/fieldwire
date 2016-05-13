@@ -1,0 +1,18 @@
+%h2= @project.name
+
+- if @floorplans.any?
+  %h3 Floorplans
+  %ul
+    - @floorplans.each do |floorplan|
+      %li= floorplan.display_name
+
+%h4 Attach New Floorplan
+
+= form_for :floorplan, url: project_floorplans_url(@project) do |f|
+  = f.label      :display_name, 'Floorplan Name'
+  = f.text_field :display_name
+
+  = f.label      :blueprint, 'Blueprint'
+  = f.file_field :blueprint
+
+  = f.submit 'Save Floorplan'
